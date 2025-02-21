@@ -81,7 +81,26 @@ function fnSlideRichTextLineSpacing(PhpPresentation $objPHPPresentation): void
     $shape->createTextRun('Line Spacing 300');
 }
 
-function fnSlideRichTextShadow(PhpPresentation $objPHPPresentation): void
+function fnSlideRichTextRotation(PhpPresentation $objPHPPresentation)
+{
+    // Create templated slide
+    echo date('H:i:s') . ' Create templated slide' . EOL;
+    $currentSlide = createTemplatedSlide($objPHPPresentation);
+
+    // Create a shape (text)
+    echo date('H:i:s') . ' Create a shape (rich text) with rotation' . EOL;
+    $shape = $currentSlide->createRichTextShape();
+    $shape->setHeight(100);
+    $shape->setWidth(400);
+    $shape->setOffsetX(100);
+    $shape->setOffsetY(100);
+    $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+    $shape->setRotation(90);
+
+    $shape->createTextRun('RichText with rotation');
+}
+
+function fnSlideRichTextShadow(PhpPresentation $objPHPPresentation)
 {
     // Create templated slide
     echo date('H:i:s') . ' Create templated slide' . EOL;
@@ -143,6 +162,7 @@ $objPHPPresentation->removeSlideByIndex(0);
 
 fnSlideRichText($objPHPPresentation);
 fnSlideRichTextLineSpacing($objPHPPresentation);
+fnSlideRichTextRotation($objPHPPresentation);
 fnSlideRichTextShadow($objPHPPresentation);
 fnSlideRichTextList($objPHPPresentation);
 
